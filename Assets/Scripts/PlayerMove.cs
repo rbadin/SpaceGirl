@@ -5,12 +5,12 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float speed = 10;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D Rigidbody2D;
 
      // Awake is called when the script instance is being loaded
      void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        Rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     // This function is called every fixed framerate frame, if the MonoBehaviour is enabled
@@ -24,6 +24,6 @@ public class PlayerMove : MonoBehaviour
 
         Vector2 newVelocity = new Vector2(xSpeed, ySpeed);
 
-        rigidbody2D.velocity = newVelocity;
+        Rigidbody2D.velocity = newVelocity;
     }
 }
