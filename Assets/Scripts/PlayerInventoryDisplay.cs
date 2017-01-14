@@ -10,6 +10,14 @@ public class PlayerInventoryDisplay : MonoBehaviour
 
     internal void OnChangeInventory(List<Pickup> inventory)
     {
+        //setting the items in alphabetical sorting
+        inventory.Sort(
+            delegate (Pickup p1, Pickup p2)
+            {
+                return p1.description.CompareTo(p2.description);
+            }
+            );
+
         // clear display
         inventoryText.text = "";
 
