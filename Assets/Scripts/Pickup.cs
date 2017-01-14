@@ -1,8 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Pickup : MonoBehaviour
 {
-    public string description;
+    public enum PickUpType
+    {
+        Star,
+        Key,
+        Heart
+    }
+
+    public PickUpType type;
 }

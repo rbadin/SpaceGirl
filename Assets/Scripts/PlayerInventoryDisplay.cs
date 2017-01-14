@@ -8,31 +8,23 @@ public class PlayerInventoryDisplay : MonoBehaviour
 {
     public Text inventoryText;
 
-    internal void OnChangeInventory(List<Pickup> inventory)
+    public void OnChangeInventory(Dictionary<Pickup.PickUpType, int> inventory)
     {
-        //setting the items in alphabetical sorting
-        inventory.Sort(
-            delegate (Pickup p1, Pickup p2)
-            {
-                return p1.description.CompareTo(p2.description);
-            }
-            );
-
         // clear display
         inventoryText.text = "";
 
         //build up new set of items
         string newInventoryText = "carrying: ";
         int numItems = inventory.Count;
-        for (int i = 0; i < numItems; i++)
+
+        foreach (var item in inventory)
         {
-            string description = inventory[i].description;
-            newInventoryText += " [" + description + "]";
+            int itemTotal = item.Value;
+            string description = item.Key.ToString();
+            newInventoryText += " [" + description + " x " + itemTotal + " ]";
         }
         if (numItems < 1) newInventoryText = "(empty inventory)";
-        {
-            // update screen display
-            inventoryText.text = newInventoryText;
-        }
+
+        inventoryText.text = newInventoryText;
     }
 }

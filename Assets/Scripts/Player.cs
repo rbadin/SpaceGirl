@@ -6,14 +6,12 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    private PlayerInventoryDisplay playerInventoryDisplay;
-    private List<Pickup> inventory = new List<Pickup>();
+    private InventoryManager inventoryManager;
     
     // Start is called just before any of the Update methods is called the first time
     void Start()
     {
-        playerInventoryDisplay = GetComponent<PlayerInventoryDisplay>();
-        playerInventoryDisplay.OnChangeInventory(inventory);
+        inventoryManager = GetComponent<InventoryManager>();
     }
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
@@ -22,8 +20,7 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Pickup"))
         {
             Pickup item = collision.GetComponent<Pickup>();
-            inventory.Add(item);
-            playerInventoryDisplay.OnChangeInventory(inventory);
+            inventoryManager.Add(item);
             Destroy(collision.gameObject);
         }
     }
