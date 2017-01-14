@@ -6,25 +6,19 @@ using UnityEngine.UI;
 
 public class PlayerInventoryDisplay : MonoBehaviour
 {
-    public Text inventoryText;
+    const int NUM_INVENTORY_SLOTS = 10;
+    public PickupUI[] slots = new PickupUI[NUM_INVENTORY_SLOTS];
 
-    public void OnChangeInventory(Dictionary<Pickup.PickUpType, int> inventory)
+    public void OnChangeStarTotal(int starTotal)
     {
-        // clear display
-        inventoryText.text = "";
-
-        //build up new set of items
-        string newInventoryText = "carrying: ";
-        int numItems = inventory.Count;
-
-        foreach (var item in inventory)
+        for (int i = 0; i < NUM_INVENTORY_SLOTS; i++)
         {
-            int itemTotal = item.Value;
-            string description = item.Key.ToString();
-            newInventoryText += " [" + description + " x " + itemTotal + " ]";
+            PickupUI slot = slots[i];
+            if (i < starTotal)
+                slot.DisplayYellow();
+            else
+                slot.DisplayGrey();
+            
         }
-        if (numItems < 1) newInventoryText = "(empty inventory)";
-
-        inventoryText.text = newInventoryText;
     }
 }
