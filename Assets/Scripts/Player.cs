@@ -6,13 +6,15 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public Text startText;
     public bool carryingStar = false;
+    public Image starImage;
+    public Sprite iconStar;
+    public Sprite iconNoStar;
 
     // Start is called just before any of the Update methods is called the first time
     void Start()
     {
-        UpdateStarText();
+        UpdateStarImage();
     }
 
     // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
@@ -21,15 +23,20 @@ public class Player : MonoBehaviour
         if (collision.CompareTag("Star"))
         {
             carryingStar = true;
-            UpdateStarText();
+            UpdateStarImage();
             Destroy(collision.gameObject);
         }
     }
     
-    private void UpdateStarText()
+    private void UpdateStarImage()
     {
-        string starMessage = "no star :=(";
-        if (carryingStar) starMessage = "Carring star :-)";
-        startText.text = starMessage;
+        if (carryingStar)
+        {
+            starImage.sprite = iconStar;
+        }
+        else
+        {
+            starImage.sprite = iconNoStar;
+        }
     }
 }
